@@ -8,6 +8,11 @@ A simple library meant to be used as a build dependency with Cargo packages in
 order to build a set of C/C++ files into a static archive. This crate calls out
 to the most relevant compiler for a platform, for example using `cl` on MSVC.
 
+## Miosix patches
+This fork of cc-rs contains miosix specific patches.
+
+At the moment the only supported target is `thumbv7em-miosix-eabihf`
+
 ## Using cc-rs
 
 First, you'll want to both add a build script for your crate (`build.rs`) and
@@ -15,7 +20,14 @@ also add this crate to your `Cargo.toml` via:
 
 ```toml
 [build-dependencies]
-cc = "1.0"
+cc = { git = "https://github.com/Tazdevil971/cc-rs.git" }
+```
+
+And this to force other libraries to use this fork:
+
+```toml
+[patch.crates-io]
+cc = { git = "https://github.com/Tazdevil971/cc-rs.git" }
 ```
 
 Next up, you'll want to write a build script like so:
